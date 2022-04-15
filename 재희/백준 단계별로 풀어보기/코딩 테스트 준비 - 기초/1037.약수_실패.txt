@@ -1,0 +1,80 @@
+약수
+시간 제한	메모리 제한	제출	정답	맞힌 사람	정답 비율
+2 초	512 MB	37927	19690	17066	52.223%
+문제
+양수 A가 N의 진짜 약수가 되려면, N이 A의 배수이고, A가 1과 N이 아니어야 한다. 어떤 수 N의 진짜 약수가 모두 주어질 때, N을 구하는 프로그램을 작성하시오.
+
+입력
+첫째 줄에 N의 진짜 약수의 개수가 주어진다. 이 개수는 50보다 작거나 같은 자연수이다. 둘째 줄에는 N의 진짜 약수가 주어진다. 1,000,000보다 작거나 같고, 2보다 크거나 같은 자연수이고, 중복되지 않는다.
+
+출력
+첫째 줄에 N을 출력한다. N은 항상 32비트 부호있는 정수로 표현할 수 있다.
+____
+[다른 사람의 답]
+입력으로 들어오는 값 중 최솟값과 최대값을 서로 곱하면 됨..
+
+public class Main {
+
+	public static void main(String[] args) {
+		Scanner scan = new Scanner(System.in);
+
+		int T = scan.nextInt();
+
+		int max = Integer.MIN_VALUE; //-2,147,483,648
+		int min = Integer.MAX_VALUE; //-2,147,483,648
+
+		while (T-- > 0) {
+			int N = scan.nextInt();
+			max = N > max ? N : max;
+			min = N < min ? N : min;
+		}
+
+		System.out.println(min * max);
+	}
+}
+
+_____
+[내가 생각한 방법]
+숫자를 받는 메서드를 만들어서 (int _, int _[])앞에는 int 뒤에는 배열
+향상된 for문으로 배열 값(N)을 받고 
+약수이니까 A와 N 아무숫자나 나눴을 때 나머지가 0이기 때문에 A%N == 0 해서
+A값을 그안에서 구하려했는데... 터무니 없었음
+
+public class Main {
+
+	// 문제
+	// A가 N의 진짜 약수가 되려면 N이 A의 배수이고 A가 1과 N이 아니어야한다
+	// A=8 N= 2 4
+	// 첫째줄 N의 진짜 약수 갯수 (50보다 작거나 같음)
+	// 둘째줄 N의 진짜 약수
+
+	// 풀이
+	// 첫째줄은 숫자 한개 int & 두번째줄은 숫자가 많으니까 배열로
+	int solution(int total, int N[]) {
+		int A = 0; // A값 구하기
+		int answer = 0; // 정답
+		// A는 N과 같은 수이면 안되고 더 작아야한다
+		// A/N 나머지는 0이어야한다 => %
+		// 배열 N에서 숫자 하나씩 빼오게 하려면 for문...
+		for (int num : N) {
+			if (0 == A % num) {			
+				// A값을 이제 구하려면...
+				int min = N.MIN_VALUE;
+				int max = Integer.MAX_VALUE;			
+				A = min*max;
+			}
+		}
+		return A;
+	}
+	public static void main(String[] args) {
+		Main main = new Main();
+		Scanner scan = new Scanner(System.in);	
+		int total = scan.nextInt();
+		// int N[] = scan.nextBigInteger(); //배열
+		int N[] = null;
+		//System.out.println(main.solution(total,N[] ));
+	}
+}
+
+
+___
