@@ -1,0 +1,79 @@
+설명
+
+앞에서 읽을 때나 뒤에서 읽을 때나 같은 문자열을 회문 문자열이라고 합니다.
+
+문자열이 입력되면 해당 문자열이 회문 문자열이면 "YES", 회문 문자열이 아니면 “NO"를 출력하는 프로그램을 작성하세요.
+
+단 회문을 검사할 때 대소문자를 구분하지 않습니다.
+
+
+입력
+첫 줄에 길이 100을 넘지 않는 공백이 없는 문자열이 주어집니다.
+
+
+출력
+첫 번째 줄에 회문 문자열인지의 결과를 YES 또는 NO로 출력합니다.
+
+_________
+
+1. 길이/2하면 홀수 짝수 상관 없이 회문 문자열을 비교할 수 있다
+toUpperCase | toLowerCase -> 대소문자 통일
+2. StringBuilder(str).reverse().toString()
+equalsIgnoreCase : 대소문자 구분 안하고 비교 | equals 대소문자 구분해서 비교 
+
+__________
+
+1. 
+public class No7 {
+
+	//알고리즘을 생각해서 풀기
+
+	public String solution(String str) {
+		String an = "YES";
+		
+		str = str.toLowerCase();//대문자로 통일
+		
+		int len = str.length(); //goog g(i) o o g(len-i-1)
+		for (int i = 0; i < len / 2; i++) {
+			if(str.charAt(i)!=str.charAt(len-i-1)) //길이 - i - 1
+				//an ="NO";
+		return "NO";		
+		}
+			return an;
+		}
+	
+	public static void main(String[] args) {
+		No7 T = new No7();
+		Scanner scan = new Scanner(System.in);
+		String str = scan.next();
+		
+		System.out.print(T.solution(str));	
+	}
+}
+
+
+2. 
+public class No7_2 {
+
+	// StringBuilder reverse()
+	public String solution(String str) {
+		String an = "NO";
+
+		String tmp = new StringBuilder(str).reverse().toString(); // 뒤집어짐
+		if (str.equalsIgnoreCase(tmp)) { //equals -> 대소문자 구분함 / equalsIgnoreCase -> 대소문자 구분하지 않고 비교
+			an = "YES";
+		}
+		return an;
+	}
+	public static void main(String[] args) {
+		No7_2 T = new No7_2();
+		Scanner scan = new Scanner(System.in);
+		String str = scan.next();
+
+		System.out.print(T.solution(str));
+	}
+}
+
+
+
+
