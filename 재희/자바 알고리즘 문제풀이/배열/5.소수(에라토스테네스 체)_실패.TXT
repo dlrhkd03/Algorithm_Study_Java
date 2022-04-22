@@ -1,0 +1,48 @@
+설명
+
+자연수 N이 입력되면 1부터 N까지의 소수의 개수를 출력하는 프로그램을 작성하세요.
+
+만약 20이 입력되면 1부터 20까지의 소수는 2, 3, 5, 7, 11, 13, 17, 19로 총 8개입니다.
+
+
+입력
+첫 줄에 자연수의 개수 N(2<=N<=200,000)이 주어집니다.
+
+
+출력
+첫 줄에 소수의 개수를 출력합니다.
+
+
+수학에서 에라토스테네스의 체는 소수 를 찾는 방법이다.
+
+
+import java.util.Scanner;
+
+public class Main {
+
+	public int solution(int n) {
+		int answer = 0;
+		
+		int[]ch= new int[n+1]; //n번 인덱스까지 | 배열은 0부터 시작하니까 n+1
+		for(int i=2; i<=n;i++) { //n+1이니까 '<='
+			if(ch[i]==0) { //소수: 수학에서 1과 그수 자신 이외의 자연수로는 나눌 수 없는, 1보다 큰 자연수이다. 
+				answer++; //소수니까 증가
+
+				for(int j=i;j<=n;j=j+i) //i의 배수만큼 돌아야해서 2 , 4 , 6, 8...
+					ch[j]=1; //중복되는 숫자는 체크해서 지워주기..1로 만들어지면 포함안되니까 지워짐 앞에 for문이 1로 시작하니까
+			}
+		}
+
+		return answer;
+	}
+
+	public static void main(String[] args) {
+
+		Main main = new Main();
+		Scanner scan = new Scanner(System.in);
+
+		int n = scan.nextInt();
+
+		System.out.println(main.solution(n));
+	}
+}
